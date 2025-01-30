@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
         val edtPeso = findViewById<TextInputEditText>(R.id.edt_peso)
@@ -26,37 +25,35 @@ class MainActivity : AppCompatActivity() {
 
         val btnCalcular = findViewById<Button>(R.id.btn_calcular)
 
-        btnCalcular {
-            setOnClickListener {
-                val pesoStr: String = edtPeso.text.toString(
-                val alturaStr: String = edtAltura.text.toString()
+        btnCalcular.setOnClickListener {
+            val pesoStr: String = edtPeso.text.toString()
+            val alturaStr: String = edtAltura.text.toString()
 
-                if (pesoStr == "" || alturaStr == "") {
-                    Snackbar
-                        .make(
-                            edtPeso,
-                            "Preencha todos os campos",
-                            Snackbar.LENGTH_LONG
-                        )
-                        .show()
+            if (pesoStr == "" || alturaStr == "") {
+                Snackbar
+                    .make(
+                        edtPeso,
+                        "Preencha todos os campos",
+                        Snackbar.LENGTH_LONG
+                    )
+                    .show()
 
 
-                } else {
-                    val peso = pesoStr.toFloat()
-                    val altura = alturaStr.toFloat()
+            } else {
+                val peso = pesoStr.toFloat()
+                val altura = alturaStr.toFloat()
 
-                    val alturaQ2 = altura * altura
-                    val resultado = peso / alturaQ2
+                val alturaQ2 = altura * altura
+                val resultado = peso / alturaQ2
 
-                    val intent = Intent(this, ResultActivity::class.java)
-                    intent.putExtra(KEY_RESULT_IMC, resultado)
-                    startActivity(intent)
+                val intent = Intent(this, ResultActivity::class.java)
+                intent.putExtra(KEY_RESULT_IMC, resultado)
+                startActivity(intent)
 
-                    println("Roque acao do botao" + resultado)
-                }
-
+                println("Roque acao do botao" + resultado)
             }
-        }
 
+
+        }
     }
 }
